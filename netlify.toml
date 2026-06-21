@@ -1,0 +1,14 @@
+[build]
+  # Tell Netlify that the frontend folder is what we want to publish
+  publish = "frontend"
+  
+  # There is no build command since it is vanilla HTML/CSS/JS
+  command = ""
+
+[[redirects]]
+  # Example redirect rule in case you eventually use a hosted backend.
+  # This avoids CORS issues by proxying /api/ to your backend.
+  # from = "/api/*"
+  # to = "https://your-java-backend-url.com/api/:splat"
+  # status = 200
+  # force = true

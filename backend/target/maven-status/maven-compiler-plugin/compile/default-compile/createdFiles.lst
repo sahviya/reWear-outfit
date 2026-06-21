@@ -1,0 +1,7 @@
+com\rewear\DBConnection.class
+com\rewear\UserDAO.class
+com\rewear\Admin.class
+com\rewear\User.class
+com\rewear\Buyer.class
+com\rewear\CorsFilter.class
+com\rewear\AuthServlet.class
