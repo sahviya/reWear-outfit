@@ -742,38 +742,12 @@
 
             try {
                 if (Array.isArray(checkoutProduct)) {
-                    // It's a cart checkout
-                    for (const item of checkoutProduct) {
-                        const products = typeof getProducts === 'function' ? getProducts() : [];
-                        const p = products.find(prod => prod.id === item.id) || { title: item.id, image: '', price: 0 };
-                        
-                        await fetch('http://localhost:8080/api/orders', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({
-                                buyerId: 1, // Defaulting to 1 for basic integration
-                                productId: parseInt(item.id) || 1,
-                                orderType: 'Purchase',
-                                totalAmount: (p.price * item.qty),
-                                status: 'Confirmed'
-                            })
-                        });
-                    }
                     // Clear cart
                     localStorage.setItem('userCart', JSON.stringify([]));
-                } else {
-                    await fetch('http://localhost:8080/api/orders', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            buyerId: 1,
-                            productId: parseInt(checkoutProduct.id) || 1,
-                            orderType: 'Purchase',
-                            totalAmount: totalAmount,
-                            status: 'Confirmed'
-                        })
-                    });
                 }
+
+                // Simulate network delay
+                await new Promise(r => setTimeout(r, 1000));
 
                 // Show success screen with custom animation
                 const successOverlay = document.getElementById('successOverlay');

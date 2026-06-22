@@ -148,37 +148,22 @@ document.addEventListener('DOMContentLoaded', function () {
             setButtonLoading(submitBtn, true);
             disableFormInputs(loginForm, true);
             
-            fetch('http://localhost:8080/api/auth/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username: emailVal, password: passwordVal })
-            })
-            .then(res => {
-                if (!res.ok) throw new Error('Invalid credentials');
-                return res.json();
-            })
-            .then(data => {
-                if (data.status === 'success') {
-                    localStorage.setItem('loggedInUser', data.username);
-                    
-                    if (rememberCheckbox && rememberCheckbox.checked) {
-                        localStorage.setItem('rememberedEmail', emailVal);
-                    } else {
-                        localStorage.removeItem('rememberedEmail');
-                    }
-                    
-                    showSuccessModal(
-                        'Welcome Back!',
-                        `Logged in successfully. Welcome, ${data.username}!`,
-                        'index.html'
-                    );
+            // Simulate login without backend integration
+            setTimeout(() => {
+                localStorage.setItem('loggedInUser', emailVal.split('@')[0]);
+                
+                if (rememberCheckbox && rememberCheckbox.checked) {
+                    localStorage.setItem('rememberedEmail', emailVal);
+                } else {
+                    localStorage.removeItem('rememberedEmail');
                 }
-            })
-            .catch(err => {
-                showFieldError(emailEl, 'Incorrect username or password. Please try again.');
-                setButtonLoading(submitBtn, false);
-                disableFormInputs(loginForm, false);
-            });
+                
+                showSuccessModal(
+                    'Welcome Back!',
+                    `Logged in successfully. Welcome, ${emailVal.split('@')[0]}!`,
+                    'index.html'
+                );
+            }, 1000);
         });
     }
 
@@ -303,37 +288,14 @@ document.addEventListener('DOMContentLoaded', function () {
             setButtonLoading(submitBtn, true);
             disableFormInputs(registerForm, true);
             
-            fetch('http://localhost:8080/api/auth/register', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    username: usernameVal,
-                    password: passwordVal,
-                    email: emailVal,
-                    fullName: fullNameEl.value.trim(),
-                    phone: mobileVal,
-                    address: cityEl.value.trim() + ", " + stateEl.value.trim(),
-                    userType: 'Buyer'
-                })
-            })
-            .then(res => {
-                if (!res.ok) throw new Error('Registration failed. Username or email may already exist.');
-                return res.json();
-            })
-            .then(data => {
-                if (data.status === 'success') {
-                    showSuccessModal(
-                        'Success!',
-                        'Account created successfully! Redirecting to Sign In...',
-                        'login.html'
-                    );
-                }
-            })
-            .catch(err => {
-                showFieldError(usernameEl, err.message);
-                setButtonLoading(submitBtn, false);
-                disableFormInputs(registerForm, false);
-            });
+            // Simulate registration without backend integration
+            setTimeout(() => {
+                showSuccessModal(
+                    'Success!',
+                    'Account created successfully! Redirecting to Sign In...',
+                    'login.html'
+                );
+            }, 1000);
         });
     }
 
