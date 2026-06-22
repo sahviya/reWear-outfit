@@ -610,15 +610,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     setupHeaderScroll();
     setupTabNavigation();
     
-    try {
-        const response = await fetch('http://localhost:8080/api/products');
-        if (response.ok) {
-            const dbProducts = await response.json();
-            window.ALL_PRODUCTS = [...dbProducts]; // Replace default with DB if available
-        }
-    } catch (e) {
-        console.warn('Backend not reachable, using default products', e);
-    }
+    // Removed backend fetch for products to run flawlessly as a frontend-only application
     
     // Check if on marketplace/shop page
     const isMarketplace = document.getElementById('categoryFilter') || document.getElementById('closetsScroll');
